@@ -1,0 +1,32 @@
+.hero-input {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.hero-input input {
+  width: 100%;
+  padding: 15px 50px 15px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: var(--primary-text);
+  font-size: 1rem;
+  outline: none;
+}
+
+.hero-input input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.send-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.15s;
+}
+.send-btn:hover { opacity: 1; }

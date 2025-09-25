@@ -1,0 +1,103 @@
+/* ---------- 04_utility.css ---------- */
+/* global helpers + keyframes shared by many components */
+
+/* ---- generic hide helper ---- */
+.hide-ui,
+.hide-ui * {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* ---- bounce (used by BouncingSvg) ---- */
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  25%  { transform: translateY(-20px); }
+  50%  { transform: translateY(0); }
+  75%  { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.bounce-svg {
+  cursor: pointer;
+}
+
+.bounce-svg.is-bouncing {
+  animation: bounce 0.6s ease-out;
+}
+
+/* ---- jiggle (used by logo / robot) ---- */
+@keyframes jiggle {
+  0%   { transform: translate(-50%, -50%) scale(2.5) rotate(0deg); }
+  20%  { transform: translate(-50%, -50%) scale(2.55) rotate(-1deg); }
+  40%  { transform: translate(-50%, -50%) scale(2.45) rotate(1deg); }
+  60%  { transform: translate(-50%, -50%) scale(2.52) rotate(1deg); }
+  80%  { transform: translate(-50%, -50%) scale(2.48) rotate(-1deg); }
+  100% { transform: translate(-50%, -50%) scale(2.5) rotate(0deg); }
+}
+
+/* ---- shrink (logo → top-left) ---- */
+@keyframes shrink {
+  to {
+    width: 80px;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* ---- fall-off (link letters) ---- */
+@keyframes fallOff {
+  0%   { transform: translateY(0) rotate(0); opacity: 1; }
+  100% { transform: translateY(120px) rotate(12deg); opacity: 0; }
+}
+
+/* ---- title fly-out ---- */
+@keyframes speed-away-bounce {
+  0%   { transform: translateX(0); }
+  40%  { transform: translateX(110vw); }
+  41%  { transform: translateX(-110vw); }
+  70%  { transform: translateX(5vw); }
+  85%  { transform: translateX(-1.5vw); }
+  95%  { transform: translateX(0.5vw); }
+  100% { transform: translateX(0); }
+}
+
+/* ---- utility classes (optional) ---- */
+.jiggle { animation: jiggle 0.18s infinite; }
+
+
+.falling-link{
+  text-decoration:none;
+  display:inline-block;
+}
+
+.letter{
+  display:inline-block;
+  transform-origin:center;
+  /* while not animated, keep them visible */
+  opacity:1;
+  transform:translateY(0) rotate(0);
+}
+
+@keyframes fallOff{
+  0%   { transform:translateY(0)  rotate(0);   opacity:1; }
+  100% { transform:translateY(120px) rotate(12deg); opacity:0; }
+}
+
+.letter.fall{
+  animation:fallOff .9s ease-in forwards;
+  /* forwards keeps the final key-frame state → letter stays gone */
+}
+
+
+.bot {
+  width: 180px;
+  display: block;         /* keep it in flow */
+}
+
+.bot.jiggle {
+  animation: jiggle 0.18s infinite;
+}
+
+.bot.shrink {
+  animation: shrink 0.5s forwards ease-out;
+  width: 80px;            /* final size */
+}

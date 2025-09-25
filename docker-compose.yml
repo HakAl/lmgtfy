@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  llama:
+    image: ghcr.io/ggml-org/llama.cpp:full
+    command: ["--m", "models/7B/mistral-7b-instruct-v0.2.Q4_K_M.gguf", "-c", "2048", "--host", "0.0.0.0"]
+    volumes:
+      - ./models:/models:ro
+    expose:
+      - "8080"

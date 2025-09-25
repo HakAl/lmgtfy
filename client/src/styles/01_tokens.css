@@ -1,0 +1,11 @@
+:root {
+  --bg: #082032;
+  --bg2: #2C394B;
+  --grey: #334756;
+  --orange: #FF4C29;
+  --alpha_orange: rgba(255, 76, 41, 0.5);
+  --good: #2ecc71;
+  --bad: #e74c3c;
+  --primary-text: #ecf0f1;
+  --secondary-text: #bdc3c7;
+}

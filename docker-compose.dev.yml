@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: ./client
+      target: development
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      # This OVERRIDES VITE_API_URL from client/.env when running in Docker Compose
+      - VITE_API_URL=http://localhost:3000
+      - LLAMA_HOST=llama
+      - HOST=0.0.0.0
+    depends_on:
+      - server
+  llama:
+    build:
+      context: .
+      dockerfile: Dockerfile.llama
+    command: ["-m", "/models/7B/mistral-7b-instruct-v0.2.Q4_K_M.gguf", "-c", "2048", "--host", "0.0.0.0", "--port", "8080"]
+    volumes:
+      - ./models:/models:ro
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+
+  server:
+    build:
+      context: ./server
+      target: development
+    env_file:
+      - ./server/.env
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - LLAMA_HOST=llama
+      - LLAMA_PORT=8080
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - llama

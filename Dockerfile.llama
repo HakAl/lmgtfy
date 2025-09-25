@@ -1,0 +1,30 @@
+# Use Ubuntu as base image
+FROM ubuntu:22.04
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    git \
+    wget \
+    libcurl4-openssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Clone llama.cpp repository
+RUN git clone https://github.com/ggerganov/llama.cpp /llama.cpp
+
+# Build llama.cpp with CMake
+WORKDIR /llama.cpp
+RUN mkdir build && \
+    cd build && \
+    cmake .. -DLLAMA_CURL=OFF && \
+    make
+
+# Create models directory
+WORKDIR /models
+
+# Expose port
+EXPOSE 8080
+
+# Set entrypoint to the llama-server binary
+ENTRYPOINT ["/llama.cpp/build/bin/llama-server"]

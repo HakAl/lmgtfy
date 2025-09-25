@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: ./client
+      target: production
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: ./server
+      target: production
+    env_file:
+      - ./server/.env
+    environment:
+      - NODE_ENV=production
+      - LLAMA_HOST=llama
+    depends_on:
+      - llama

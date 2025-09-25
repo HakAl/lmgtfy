@@ -1,0 +1,29 @@
+
+/* wrapper keeps the text centred even while the inner span is moving */
+.animated-title {
+  display: inline-block;
+  font-size: inherit;        /* keeps same size as the old <h1> */
+  cursor: pointer;
+  overflow: hidden;          /* hide the span while it’s outside */
+  white-space: nowrap;
+}
+
+.animated-title span {
+  display: inline-block;
+  transform: translateX(0);
+}
+
+/* --- the actual flight --- */
+@keyframes speed-away-bounce {
+  0%   { transform: translateX(0); }
+  40%  { transform: translateX(110vw); }   /* off-screen right */
+  41%  { transform: translateX(-110vw); }  /* instantly left */
+  70%  { transform: translateX(5vw); }     /* overshoot centre */
+  85%  { transform: translateX(-1.5vw); }  /* small rebound */
+  95%  { transform: translateX(0.5vw); }   /* tiny rebound */
+  100% { transform: translateX(0); }       /* settle */
+}
+
+.animated-title.is-running span {
+  animation: speed-away-bounce 1.5s ease-out;
+}

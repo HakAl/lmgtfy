@@ -1,0 +1,113 @@
+.terminal-container {
+    background-color: #1a1a1a;
+    border: 2px solid var(--bg2);
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 0 16px var(--grey);
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--good);
+    height: 400px; 
+    overflow-y: auto;
+}
+
+.terminal-prompt {
+    margin-bottom: 6px;
+    text-align: left !important;
+    display: block;
+    width: 100%;
+}
+
+.terminal-history {
+    margin-bottom: 1rem;
+}
+
+.terminal-history-item {
+    margin-bottom: 0.5rem;
+}
+
+.terminal-response {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    padding-left: 1.5rem;
+    color: var(--good);
+    text-align: left;
+    display: block;
+}
+
+.terminal-error {
+    color: var(--good);
+    padding-left: 1.5rem;
+    text-align: left;
+    display: block;
+}
+
+.terminal-input-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.terminal-prompt-sign {
+    color: var(--good);
+    margin-right: 5px;
+}
+
+.terminal-input {
+    background-color: transparent;
+    border: none;
+    color: var(--good);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1em;
+    width: 100%;
+    outline: none;
+    caret-color: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.terminal-input-wrapper.active::after {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 1.2em;
+    color: var(--good);
+    animation: blink-caret 1s step-end infinite;
+    position: absolute;
+    left: calc(var(--prompt-width) + var(--text-width));
+    top: 0;
+    pointer-events: none;
+    margin-left: 6px;
+}
+
+/* Updated cursor styling */
+.terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1em;
+    background-color: var(--good);
+    animation: blink 1s infinite;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+}
+
+@keyframes blink-caret {
+    from, to {
+        background-color: transparent;
+    }
+    50% {
+        background-color: var(--good);
+    }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.terminal-cancellation {
+  color: var(--good);
+  padding-left: 1.5rem;
+  text-align: left;
+  display: block;
+  font-weight: bold;
+}

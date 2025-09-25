@@ -1,0 +1,70 @@
+/* ---- override when answer is back ---- */
+.answer-arrived {
+  /* Remove the translation but keep the scale */
+  transform: scale(0.7) !important;
+  transition: transform 0.8s cubic-bezier(.4, 0, .2, 1);
+}
+
+.answer-row .center-logo {
+  position: static;        /* override fixed centre so flex can place it */
+  transform: scale(0.7);   /* keep the scale */
+}
+
+.answer-row {
+  /* Change from fixed to block positioning */
+  position: relative;
+  /* Remove inset: 0 */
+  width: 100%;
+  /* Use flex column layout to stack elements vertically */
+  display: flex;
+  flex-direction: column;
+  /* Align items to the start */
+  align-items: flex-start;
+  /* Remove padding-left that was making space for robot */
+  padding: 20px 0;
+  /* Allow pointer events */
+  pointer-events: auto;
+  margin-top: 20px; /* Add space between input and answer */
+}
+
+.answer-bundle {
+  /* Change from fixed to relative positioning */
+  position: relative;
+  /* Remove inset: 0 */
+  width: 100%;
+  /* Use flex to align items */
+  display: flex;
+  align-items: flex-start;
+  /* Remove padding-left that was making space for robot */
+  padding: 0;
+  box-sizing: border-box;
+  /* Allow pointer events */
+  pointer-events: auto;
+}
+
+.answer-text {
+  max-width: 55ch;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  word-break: break-word;
+  pointer-events: auto;         /* allow selection */
+  /* Add some margin for spacing */
+  margin-left: 20px; /* Space between robot and text */
+}
+
+/* ----------  loading robot (centre stage)  ---------- */
+.center-logo.answer-arrived {          /* ONLY while loading */
+  /* Remove the translation but keep the scale */
+  transform: scale(0.7) !important;
+  transition: transform 0.8s cubic-bezier(.4, 0, .2, 1);
+}
+
+.answer-bot {
+  /* Position the robot appropriately for the new layout */
+  position: relative;
+  left: 0;
+  top: 0;
+  transform: scale(0.7); /* keep the scale */
+  width: 128px;
+  z-index: 1;
+}
