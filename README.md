@@ -5,8 +5,7 @@ Create a **fake AI search assistant** that:
 
 * Takes a search input
 * Generates a funny or absurd fabricated story/summary
-* Optionally generates humorous or weird AI-generated images
-* Displays the result in a fun way (on a React site with no framework)
+* Displays the result in a terminal-like window
 
 ---
 
@@ -21,11 +20,6 @@ Create a **fake AI search assistant** that:
 
 ---
 
-## TODO
-
-* Don’t expose endpoints to the public without a reverse proxy 
-
----
 
 ## 🚀 Extras / Fun Add-ons
 
@@ -33,57 +27,6 @@ Create a **fake AI search assistant** that:
 * Add chat history to show previous fake searches
 
 ---
-
-
-
-<!-- todo -->
-<!-- todo -->
-<!-- todo -->
-<!-- todo -->
-
-## Oracle Cloud Setup
-
-### 2.  Lift the quota (1 min)
-Console → **Limits, Quotas and Usage** → open a **Service-Limit Increase**  
-Request template: **“Always-Free A1 Compute”**  
-Set:  
--  **A1 Flex OCPU ≤ 4**  
--  **A1 Flex Memory ≤ 24 GB**  
-Approved in **seconds → impossible to create billable VMs** after that.
-
----
-
-### 3.  Launch the VM (3 min)
-Compute → **Instances** → **Create**  
--  **Name**: `ai-free`  
--  **Image**: **Ubuntu 22.04**  
--  **Shape**: **VM.Standard.A1.Flex** → **4 OCPU / 24 GB**  
--  **Boot volume**: 50 GB (free) + add **200 GB block** (also free)  
--  **SSH keys**: generate / save  
--  **Create** → **Running in ≤ 2 min**, **public IPv4 assigned**.
-
----
-
-
-### 4.  Lock the spend at **$0**
--  **One VM only** (second VM → pay-as-you-go)  
--  **One public IPv4** only  
--  **≤ 200 GB block** total  
--  **≤ 10 TB egress** / month  
-Do **not** upgrade to Pay-As-You-Go unless you **intentionally** exceed those numbers.
-
----
-
-### 6.  Optional safety net
-Compute → **Quotas** → set **A1-OCPU = 4**, **A1-Memory = 24**  
-→ Oracle **denies** any create that would cost money.
-
-
-
-<!-- todo -->
-<!-- todo -->
-<!-- todo -->
-<!-- todo -->
 
 
 ## 🦙 Complete Setup Guide: llama.cpp + Mistral-7B-Instruct + Express + React
@@ -218,43 +161,6 @@ cmake --build build --config Release -j --clean-first
 3. **Memory issues**: If you get out of memory errors, try a smaller model (Q2_K instead of Q4_K_M)
 
 
-
-
-<!-- todo -->
-
-
-
-You're right, I apologize for the overload. Here's the quick fix:
-
-### 1. Reset Docker Desktop
-- Uninstall Docker Desktop
-- Delete these folders:
-  - `%USERPROFILE%\AppData\Local\Docker`
-  - `%USERPROFILE%\.docker`
-- Reboot your PC
-
-### 2. Reinstall Docker
-- Download latest Docker Desktop
-- Install with "Use WSL 2" enabled
-- Wait for full initialization (whale icon stops animating)
-
-### 3. Verify WSL2
-In PowerShell (Admin):
-```powershell
-wsl --list --verbose
-```
-Should show:
-```
-docker-desktop         Running    2
-docker-desktop-data    Running    2
-```
-
-### 4. Run Your Project
-```powershell
-cd C:\Users\anyth\MINE\dev\lmgtfy
-docker-compose up --build
-```
-
-
+## Docker Local Dev
 
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
