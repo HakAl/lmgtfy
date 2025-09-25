@@ -15,19 +15,10 @@ Create a **fake AI search assistant** that:
 | ---------------------------- | ----------------------------------------------------------------------------- |
 | Text generation (funny/fake) | **Llama.cpp** with best fit LLM                                               |
 | Frontend                     | **React** (No framework, vanilla React + Vite or Parcel is fine)              |
-| Backend (optional)           | **Node.js + Express** or just **a local server** to run inference             |
-| Deployment (optional)        | Static site with Netlify/Vercel + backend on Railway/Fly.io/etc.              |
+| Backend                      | **Node.js + Express** or just **a local server** to run inference             |
+| Deployment (WIP)             | Static site with Netlify/Vercel + backend on Railway/Fly.io/etc.              |
 
 ---
-
-
-## 🚀 Extras / Fun Add-ons
-
-* Add voice generation using TTS like `coqui-ai/XTTS-v2`
-* Add chat history to show previous fake searches
-
----
-
 
 ## 🦙 Complete Setup Guide: llama.cpp + Mistral-7B-Instruct + Express + React
 
@@ -159,8 +150,3 @@ cmake --build build --config Release -j --clean-first
 1. **Port conflicts**: Make sure ports 8000, 3000, and 3001 are available
 2. **CORS issues**: The Express server is configured with CORS, but check browser console for any issues
 3. **Memory issues**: If you get out of memory errors, try a smaller model (Q2_K instead of Q4_K_M)
-
-
-## Docker Local Dev
-
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
