@@ -9,27 +9,22 @@ export function useChat() {
 
   const mutation = useMutation({
     mutationFn: async ({ query, apiKey }) => {
-      // Reset previous response
       setStreamedResponse('');
       setIsStreaming(true);
       
-      // Create a new AbortController for this request
       abortControllerRef.current = new AbortController();
       const { signal } = abortControllerRef.current;
 
       return new Promise((resolve, reject) => {
         streamChat(
           { query, apiKey, signal },
-          // onChunk callback - called for each piece of content
           (chunk) => {
             setStreamedResponse(prev => prev + chunk);
           },
-          // onComplete callback - called when streaming is finished
           () => {
             setIsStreaming(false);
             resolve();
           },
-          // onError callback - called if there's an error
           (error) => {
             setIsStreaming(false);
             reject(error);
@@ -38,12 +33,10 @@ export function useChat() {
       });
     },
     onSettled: () => {
-      // Clean up the abort controller
       abortControllerRef.current = null;
     }
   });
 
-  // Function to abort the current request
   const abort = () => {
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
@@ -51,7 +44,6 @@ export function useChat() {
     }
   };
 
-  // Reset the state
   const reset = () => {
     setStreamedResponse('');
     mutation.reset();

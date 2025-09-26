@@ -26,15 +26,13 @@
 }
 
 @media (max-width: 768px) {
-  .hero h1 { font-size: 2.5rem; }
+  .hero h1 { font-size: 2.0rem; }
   .hero .subtitle { font-size: 1.2rem; }
   .hero .container { gap: 10px; }
   .hero .icon { width: 40px; height: 40px; }
 }
 
 .hero .icon {
-    width: 60px; /* Adjust size as needed */
-    height: 60px; /* Adjust size as needed */
-    /* You might need to adjust fill color if your SVG is single-color */
-    fill: var(--primary-text);
+    width: 60px;
+    height: 60px; 
 }

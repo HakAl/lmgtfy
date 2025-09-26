@@ -8,10 +8,12 @@ function App() {
     <>
       <section className={'hero'}>
         <div className="container">
-          <BouncingSvg />
-          <AnimatedTitle title={"LMGTFY"} />
+          <AnimatedTitle title={"Hi, I'm LMGTFY."} />
         </div>
+        <div className="container">
+          <BouncingSvg />
         <Subtitle />
+        </div>
         <Terminal />
       </section>
     </>

@@ -1,10 +1,8 @@
-
-/* wrapper keeps the text centred even while the inner span is moving */
 .animated-title {
   display: inline-block;
-  font-size: inherit;        /* keeps same size as the old <h1> */
+  font-size: inherit; 
   cursor: pointer;
-  overflow: hidden;          /* hide the span while it’s outside */
+  overflow: hidden;
   white-space: nowrap;
 }
 

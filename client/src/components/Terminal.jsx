@@ -147,9 +147,8 @@ function Terminal() {
   return (
     <div className="terminal-container" ref={containerRef}>
       <div className="terminal-prompt">Welcome to the LMGTFY 0.1 terminal.</div>
-      <div className="terminal-prompt">Type your query below:</div>
+      <div className="terminal-prompt">Search prompt enabled.</div>
       
-      {/* Command history */}
       <div className="terminal-history">
         {history.map((item) => (
           <div key={item.id} className="terminal-history-item">
@@ -170,7 +169,6 @@ function Terminal() {
         ))}
       </div>
 
-      {/* Current input */}
       <form onSubmit={handleSubmit}>
         <div
           className={`terminal-input-wrapper ${isActive ? 'active' : ''}`}
