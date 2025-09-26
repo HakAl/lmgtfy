@@ -2,6 +2,7 @@ import BouncingSvg from './components/BouncingSvg';
 import AnimatedTitle from './components/AnimatedTitle';
 import Terminal from './components/Terminal';
 import Subtitle from './components/Subtitle';
+import FallingLink from './components/FallingLink';
 
 function App() {
   return (
@@ -12,9 +13,12 @@ function App() {
         </div>
         <div className="container">
           <BouncingSvg />
-        <Subtitle />
+          <Subtitle />
         </div>
         <Terminal />
+      <div className='footer'>
+        <p>LMGTFY1.0 service droid source code: <FallingLink text='Help!' href='https://github.com/HakAl/lmgtfy' /></p> 
+      </div>
       </section>
     </>
   );
