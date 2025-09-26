@@ -19,8 +19,8 @@ Create a **fake AI search assistant** that:
 | ---------------------------- | ----------------------------------------------------------------------------- |
 | Text generation (funny/fake) | **Llama.cpp** for inference with best fit LLM  (mistral-7b worked for me)     |
 | Frontend                     | **React** React + Vite                                                        |
-| Backend                      | **Node.js + Express** API interacts with llama server                         |
-| Deployment (WIP)             | Docker, GCP, nginx                                                            |
+| Backend                      | **Node.js** API interacts with llama server                                   |
+| Deployment (WIP)             | Docker, nginx, GCP (WIP- local only atm)                                      |
 
 ---
 
@@ -38,16 +38,16 @@ cd llama.cpp
 ./llama-server -m models/mistral-7b-instruct-v0.2.Q4_K_M.gguf --host 0.0.0.0 --port 8000 --ctx-size 4096 --threads 4
 ```
 
-**Window 2 - Start Express backend:**
+**Window 2 - Start Node backend:**
 ```powershell
-cd mistral-express-react/backend
+cd lmgtfy/server
 npm run dev
 ```
 
 **Window 3 - Start React frontend:**
 ```powershell
-cd mistral-express-react/frontend
-npm start
+cd lmgtfy/client
+npm run dev
 ```
 
 **Docker** 
@@ -74,5 +74,3 @@ Initial Strategy with $300 Credits:
 * Create a custom VM with enough RAM.
 * e2-standard-2: 2 vCPUs, 8 GB RAM.
 * || if too slow: e2-standard-4: 4 vCPUs, 16 GB RAM.
-
-
