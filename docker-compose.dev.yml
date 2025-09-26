@@ -16,6 +16,8 @@ services:
       - VITE_API_URL=http://localhost:3000
       - LLAMA_HOST=llama
       - HOST=0.0.0.0
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=1000
     depends_on:
       - server
   llama:

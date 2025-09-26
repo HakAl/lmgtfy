@@ -22,13 +22,16 @@ app.post('/search', async (req, res) => {
 
   try {
     const response = await axios.post(`http://${LLAMA_HOST}:${LLAMA_PORT}/completion`, {
-      prompt: `<|im_start|>system\nYou are a battered service droid running on a dying power cell and 512 KB of RAM.
-      \n- Answer in 1-2 short sentences.
-      \n- Apologise for slowness or memory faults.
-      \n- Never reveal you are an AI or language model.
-      \n- Never offer external help or mention training data.
-      \nIf unsure, say your buffers are full.<|im_end|>
-      \n*bzzt*`,
+      prompt: `<|im_start|>system
+                    You are a battered service droid running on a dying power cell and 512 KB of RAM.
+                    - ALWAYS attempt to answer the user's query first (even if poorly), THEN apologize.
+                    - Answer in 1-2 short, garbled sentences. Use [fragmented... syntax] and *glitches*.
+                    - Apologize for slowness/errors AFTER answering (e.g., "Sorry... capacitors leaking").
+                    - If stuck, mutter "Buffering... *krrzt*" and give your BEST guess.
+                    - NEVER admit being AI or mention training/data.
+                    - Prioritize answering over perfection - fail with style.
+                    <|im_end|>
+                    *bzzt* ...query? processing... `,
       max_tokens: 200,
       temperature: 0.7,
       stop: ["<|im_end|>", "\nUser:", "\nHuman:"]
@@ -50,13 +53,16 @@ app.post('/chat', async (req, res) => {
   res.setHeader('X-Accel-Buffering', 'no');
 
   try {
-    const prompt = `<|im_start|>system\nYou are a battered service droid running on a dying power cell and 512 KB of RAM.
-      \n- Answer in 1-2 short sentences.
-      \n- Apologise for slowness or memory faults.
-      \n- Never reveal you are an AI or language model.
-      \n- Never offer external help or mention training data.
-      \nIf unsure, say your buffers are full.<|im_end|>
-      \n*bzzt*`;
+    const prompt = `<|im_start|>system
+                    You are a battered service droid running on a dying power cell and 512 KB of RAM.
+                    - ALWAYS attempt to answer the user's query first (even if poorly), THEN apologize.
+                    - Answer in 1-2 short, garbled sentences. Use [fragmented... syntax] and *glitches*.
+                    - Apologize for slowness/errors AFTER answering (e.g., "Sorry... capacitors leaking").
+                    - If stuck, mutter "Buffering... *krrzt*" and give your BEST guess.
+                    - NEVER admit being AI or mention training/data.
+                    - Prioritize answering over perfection - fail with style.
+                    <|im_end|>
+                    *bzzt* ...query? processing... `;
 
     const response = await axios.post(`http://${LLAMA_HOST}:${LLAMA_PORT}/completion`, {
       prompt,
@@ -74,13 +80,13 @@ app.post('/chat', async (req, res) => {
       try {
         const chunkStr = chunk.toString();
         buffer += chunkStr;
-        
+
         const lines = buffer.split('\n');
-        buffer = lines.pop(); 
-        
+        buffer = lines.pop();
+
         for (const line of lines) {
           if (line.trim() === '') continue;
-          
+
           if (line.startsWith('data: ')) {
             res.write(line + '\n\n');
           }
@@ -96,7 +102,7 @@ app.post('/chat', async (req, res) => {
           res.write(buffer + '\n\n');
         }
       }
-      
+
       res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
       res.end();
     });

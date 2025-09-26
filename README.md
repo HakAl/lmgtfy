@@ -51,7 +51,7 @@ cd mistral-express-react/frontend
 npm start
 ```
 
-**Docker**
+**Docker** --
 NOTE: Hot reload not enabled for Docker build yet.
 
 ```

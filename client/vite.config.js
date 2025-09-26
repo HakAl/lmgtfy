@@ -7,5 +7,24 @@ export default defineConfig({
     alias: {
       '@': './src',
     }
+  },
+  
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+    strictPort: true,
+    hmr: {
+      host: 'localhost',
+      port: 5173,
+      protocol: 'ws',
+    },
+    watch: {
+      usePolling: true,
+      interval: 1000,
+    }
+  },
+  // Ensure file changes are detected
+  optimizeDeps: {
+    exclude: ['node_modules']
   }
 })

@@ -17,7 +17,7 @@ function App() {
         </div>
         <Terminal />
       <div className='footer'>
-        <p>LMGTFY1.0 service droid source code: <FallingLink text='Help!' href='https://github.com/HakAl/lmgtfy' /></p> 
+        <p>LMGTFY v1.0 service droid source code: <FallingLink text='Help!' href='https://github.com/HakAl/lmgtfy' /></p> 
       </div>
       </section>
     </>
