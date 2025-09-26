@@ -17,7 +17,6 @@ EXPOSE 80
 FROM node:22.12.0 AS development
 WORKDIR /app
 
-# Install dependencies first (better layer caching)
 COPY package*.json ./
 RUN npm install
 
@@ -29,8 +28,6 @@ ENV CHOKIDAR_INTERVAL=1000
 # Copy source code
 COPY . .
 
-# Expose port
 EXPOSE 5173
 
-# Start development server
 CMD ["npm", "run", "dev"]

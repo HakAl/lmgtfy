@@ -8,20 +8,19 @@ Now researching GCP for deployment since they offer $300 free credits.
 
 Create a **fake AI search assistant** that:
 
-* Takes a search input
-* "Struggles" to provide search results
-* Streams the result in a terminal-like window
-
+* Takes a search input.
+* "Struggles" to answer queries.
+* Streams results from /chat in a terminal-like window
 ---
 
 ## Tech Stack (All Free/Open Source)
 
 | Feature                      | Tool                                                                          |
 | ---------------------------- | ----------------------------------------------------------------------------- |
-| Text generation (funny/fake) | **Llama.cpp** with best fit LLM                                               |
+| Text generation (funny/fake) | **Llama.cpp** for inference with best fit LLM  (mistral-7b worked for me)     |
 | Frontend                     | **React** React + Vite                                                        |
-| Backend                      | **Node.js + Express**                            to run inference             |
-| Deployment (WIP)             | Static site with Netlify/Vercel + backend on Railway/Fly.io/etc.              |
+| Backend                      | **Node.js + Express** API interacts with llama server                         |
+| Deployment (WIP)             | Docker, GCP, nginx                                                            |
 
 ---
 
@@ -59,7 +58,7 @@ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
 ```
 
 
-## Deployment
+## Deployment -- WIP
 
 **Google Cloud (free trial)**
 
