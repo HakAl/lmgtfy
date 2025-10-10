@@ -60,6 +60,56 @@ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
 
 ## Deployment -- WIP
 
+### Pre-deploy Checks
+
+(Powershell)
+```
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml build --no-cache client
+./docker-run.sh prod
+
+iwr -UseBasicParsing -Uri http://localhost/health -TimeoutSec 2 | Select-Object StatusCode,StatusDescription
+
+iwr -UseBasicParsing -Uri http://localhost | % { $_.StatusCode }
+
+(iwr -UseBasicParsing -Uri "http://localhost/assets/index-$((iwr http://localhost|% Content|sls 'assets/index-([^"]+)\.js' -AllMatches).Matches.Groups[1].Value).js").Headers["content-type"]
+
+(iwr -UseBasicParsing -Uri http://localhost).Content -match "<title>Let Me Get That For You</title>"
+
+iwr -UseBasicParsing -Uri http://localhost/search -TimeoutSec 5 | % { $_.StatusCode }
+
+(iwr -UseBasicParsing -Uri http://localhost).Headers["x-content-type-options"] -eq "nosniff"
+
+iwr -UseBasicParsing -Uri http://localhost/search -TimeoutSec 5 | % { $_.StatusCode }
+
+docker run --rm -e NODE_ENV=production lmgtfy-server:latest node -e "console.log('NODE_ENV =', process.env.NODE_ENV)"
+
+docker stats --no-stream
+1..20 | % { start-job { iwr -Uri http://localhost/api/status } }
+
+docker logs lmgtfy-server-1 | ?{ $_ -match '^\s*{' } | ConvertFrom-Json
+
+docker run --rm -e "LLAMA_API_KEY=peekaboo" lmgtfy-server:latest
+
+docker images lmgtfy-client:latest --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}"
+
+gcloud artifacts docker scan lmgtfy-client:latest --format json
+```
+
+### Push to Artifact Registry
+
+# 1. create / choose a repo (one-time)
+gcloud artifacts repositories create lmgtfy --repository-format=docker --location=us-central1
+
+# 2. tag your local image with the full AR path
+docker tag lmgtfy-client:latest us-central1-docker.pkg.dev/YOUR_PROJECT/lmgtfy/lmgtfy-client:v1.0.0
+
+# 3. push
+docker push us-central1-docker.pkg.dev/YOUR_PROJECT/lmgtfy/lmgtfy-client:v1.0.0
+
+# 4. now scan
+gcloud artifacts docker scan us-central1-docker.pkg.dev/YOUR_PROJECT/lmgtfy/lmgtfy-client:v1.0.0 --format json
+
+
 **Google Cloud (free trial)**
 
 Google Compute Engine (GCE) - VM Instance
